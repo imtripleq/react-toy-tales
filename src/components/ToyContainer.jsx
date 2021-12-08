@@ -6,7 +6,7 @@ class ToyContainer extends React.Component {
     return (
       <div id="toy-collection">
         {this.props.cards.map((card, id) => {
-          return <ToyCard cards={card} key={id} delete={this.props.delete} />;
+          return <ToyCard cards={card} key={id} />;
         })}
       </div>
     );
