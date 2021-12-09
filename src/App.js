@@ -58,6 +58,7 @@ class App extends React.Component {
   };
 
   render() {
+    console.log(this.handleDelete);
     return (
       <>
         <Header />
@@ -73,7 +74,7 @@ class App extends React.Component {
         <div className="buttonContainer">
           <button onClick={this.handleClick}> Add a Toy </button>
         </div>
-        <ToyContainer cards={this.state.cards} delete={this.handleDelete} />
+        <ToyContainer cards={this.state.cards} deleteID={this.handleDelete} />
       </>
     );
   }
