@@ -19,6 +19,7 @@ class App extends React.Component {
       },
     };
   }
+
   componentDidMount() {
     fetch("http://localhost:3000/toys")
       .then((resp) => resp.json())
@@ -43,22 +44,32 @@ class App extends React.Component {
   };
 
   handleSubmit = () => {
-    const fetchNew = { ...this.state.newCard };
     fetch("http://localhost:3000/toys", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(fetchNew),
+      body: JSON.stringify(this.state.newCard),
     });
   };
 
+  ///////////////// Need to trigger refresh render
   handleDelete = (id) => {
     fetch(`http://localhost:3000/toys/${id}`, {
       method: "DELETE",
     });
   };
+  ///////////////
+
+  handleLike = (passId) => {
+    const likeCards = this.state.cards.map((card) => {
+      if (card.id === passId) {
+        card.likes += 1;
+        return card;
+      } else return card;
+    });
+    this.setState({ cards: likeCards });
+  };
 
   render() {
-    console.log(this.handleDelete);
     return (
       <>
         <Header />
@@ -74,7 +85,11 @@ class App extends React.Component {
         <div className="buttonContainer">
           <button onClick={this.handleClick}> Add a Toy </button>
         </div>
-        <ToyContainer cards={this.state.cards} deleteID={this.handleDelete} />
+        <ToyContainer
+          cards={this.state.cards}
+          deleteID={this.handleDelete}
+          likeBtn={this.handleLike}
+        />
       </>
     );
   }

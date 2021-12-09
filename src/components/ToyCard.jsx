@@ -10,12 +10,10 @@ class ToyCard extends Component {
         <h2>{name}</h2>
         <img src={image} alt={name} className="toy-avatar" />
         <p>{likes} Likes </p>
-        <button className="like-btn">Like {"<3"}</button>
-        <button
-          className="del-btn"
-          onClick={this.props.deleteID}
-          // passId={id}
-        >
+        <button className="like-btn" onClick={() => this.props.likeBtn(id)}>
+          Like {"<3"}
+        </button>
+        <button className="del-btn" onClick={() => this.props.deleteID(id)}>
           Donate to GoodWill
         </button>
       </div>
